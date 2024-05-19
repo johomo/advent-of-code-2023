@@ -7,7 +7,7 @@ use std::io::Read;
 fn read_from_stdin() -> String {
     let mut input = String::new();
     io::stdin().read_to_string(&mut input).unwrap();
-    return input;
+    input
 }
 
 fn main() {
@@ -16,7 +16,7 @@ fn main() {
 
     let max_cubes_per_game: Vec<Vec<isize>> = input
         .split('\n')
-        .filter(|&line| line != "")
+        .filter(|&line| !line.is_empty())
         .map(|line| {
             let mut captures_sorted_by_colour =
                 pattern.captures_iter(line).collect::<Vec<Captures>>();
@@ -31,7 +31,7 @@ fn main() {
                 .map(|(_, captures_vec)| {
                     captures_vec
                         .into_iter()
-                        .map(|capture| (&capture["number"]).parse::<isize>().unwrap())
+                        .map(|capture| capture["number"].parse::<isize>().unwrap())
                         .max()
                         .unwrap()
                 })
@@ -46,7 +46,6 @@ fn main() {
         .iter()
         .enumerate()
         .filter(|(_, max_cubes)| {
-            println!("{:?}", max_cubes);
             max_cubes[0] <= cubes_available[0]
                 && max_cubes[1] <= cubes_available[1]
                 && max_cubes[2] <= cubes_available[2]
