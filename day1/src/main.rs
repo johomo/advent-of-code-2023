@@ -5,7 +5,7 @@ use std::io::Read;
 fn read_from_stdin() -> String {
     let mut input = String::new();
     io::stdin().read_to_string(&mut input).unwrap();
-    return input;
+    input
 }
 
 /// Replaces a word representing a digit into a digit.
@@ -48,12 +48,11 @@ fn main() {
 
     let sum: isize = input
         .split('\n')
-        .filter(|&line| line != "")
+        .filter(|&line| !line.is_empty())
         .map(|line| {
             let mut digits_indices = patterns
                 .iter()
-                .map(|&pattern| line.match_indices(pattern).collect::<Vec<_>>())
-                .flatten()
+                .flat_map(|&pattern| line.match_indices(pattern).collect::<Vec<_>>())
                 .collect::<Vec<_>>();
             digits_indices.sort_by_key(|match_index| match_index.0);
             let mut digits = digits_indices.iter().map(|match_index| match_index.1);
