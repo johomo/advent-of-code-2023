@@ -35,7 +35,7 @@ fn main() {
     // assertions, but Rust's de facto [regex Crate](https://docs.rs/regex/latest/regex/) does not
     // support them.
 
-    let input = read_from_stdin();
+        let input = read_from_stdin();
 
     // Use this vector of patterns to answer the first question.
     // let patterns = vec!["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
