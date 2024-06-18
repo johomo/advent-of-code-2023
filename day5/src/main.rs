@@ -109,6 +109,4 @@ fn main() {
         })
         .unwrap();
     println!("{:?}", closest_seed);
-
-
 }
